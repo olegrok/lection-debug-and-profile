@@ -23,6 +23,8 @@ BENCHMARK_DEFINE_F(StringLengthFixture, StringToNumberBenchmark)(benchmark::Stat
     StringToNumberBenchmark(state, input_string);
 }
 
-BENCHMARK_REGISTER_F(StringLengthFixture, StringToNumberBenchmark)->Range(1, 16);
+BENCHMARK_REGISTER_F(StringLengthFixture, StringToNumberBenchmark)
+    ->RangeMultiplier(2)
+    ->Range(1, 16);
 
 BENCHMARK_MAIN();

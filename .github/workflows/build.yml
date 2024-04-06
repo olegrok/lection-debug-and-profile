@@ -1,0 +1,45 @@
+name: Build and Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y clang cmake make cppcheck clang-tidy
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release \
+                         -DCMAKE_C_COMPILER=clang \
+                         -DDCMAKE_CXX_COMPILER=clang \
+                         05_hw
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Run tests
+        run: ./build/main
+
+  benchmark:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y clang cmake make git
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release \
+                         -DCMAKE_C_COMPILER=clang \
+                         -DDCMAKE_CXX_COMPILER=clang \
+                         05_hw
+      - run: cmake --build build --target benchmarks
