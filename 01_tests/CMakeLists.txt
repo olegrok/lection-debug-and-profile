@@ -8,6 +8,10 @@ add_executable(00_add 00_add.c)
 add_executable(01_simple_print 01_simple_print.c)
 
 add_executable(02_simple_marco 02_simple_marco.c)
+if(ENABLE_GCOV)
+    target_compile_options(02_simple_marco PRIVATE "--coverage")
+    target_link_options(02_simple_marco PRIVATE "--coverage")
+endif()
 
 add_executable(03_gtest_simple 03_gtest_simple.cpp)
 target_link_libraries(03_gtest_simple GTest::GTest)
