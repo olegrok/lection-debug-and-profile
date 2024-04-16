@@ -5,3 +5,7 @@ add_library(stack stack.c)
 
 add_executable(main main.c)
 target_link_libraries(main stack)
+
+find_package(GTest REQUIRED)
+add_executable(gmain gmain.cpp)
+target_link_libraries(gmain stack GTest::GTest)
