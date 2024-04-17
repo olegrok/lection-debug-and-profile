@@ -1,0 +1,1 @@
+cmake -S . -B build/ -DENABLE_ASAN=1 && cmake --build build/

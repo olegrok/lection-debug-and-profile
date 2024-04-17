@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(stack)
 
+option(ENABLE_ASAN OFF)
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -11,7 +13,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# Add ASAN, UBSAN, TSAN flags
 if(ENABLE_ASAN)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
