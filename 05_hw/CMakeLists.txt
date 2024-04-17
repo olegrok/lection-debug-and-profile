@@ -20,9 +20,17 @@ if(ENABLE_ASAN)
 endif()
 
 add_library(stack stack.c)
+if(ENABLE_GCOV)
+  target_compile_options(stack PRIVATE "--coverage")
+  target_link_libraries(stack gcov)
+endif()
 
 add_executable(main main.c)
 target_link_libraries(main stack)
 
 add_executable(tests tests/main.cpp)
+if(ENABLE_GCOV)
+    target_compile_options(tests PRIVATE "--coverage")
+    target_link_options(tests PRIVATE "--coverage")
+endif()
 target_link_libraries(tests stack gtest_main)

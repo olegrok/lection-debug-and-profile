@@ -29,7 +29,6 @@ TEST_F(StackTest, TestPush) {
   push(&stack, INT32_MAX);
   EXPECT_NE(getTop(&stack), nullptr);
   EXPECT_EQ(getTop(&stack)->data, INT32_MAX);
-
 }
 
 TEST_F(StackTest, TestPop) {
