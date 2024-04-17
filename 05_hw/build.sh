@@ -1,1 +1,1 @@
-cmake -S . -B build/ -DENABLE_ASAN=1 && cmake --build build/
+cmake -S . -B build/ -DENABLE_ASAN=1 -DENABLE_GCOV=0 && cmake --build build/
