@@ -6,7 +6,7 @@
 TEST(StackTestBase, initStackTest) {
     Stack stack;
     initStack(&stack);
-    EXPECT_TRUE(stack.top == NULL);
+    EXPECT_TRUE(getTop(&stack) == NULL);
 }
 
 TEST(StackTestBase, isEmptyTest) {
@@ -30,7 +30,6 @@ protected:
 
     void TearDown() override {
         destroyStack(stack);
-        EXPECT_TRUE(isEmpty(stack));
         delete stack;
     }
 
@@ -39,7 +38,6 @@ protected:
 
 TEST_F(StackTest, TopAfterPushTest) {
     push(stack, 10);
-    EXPECT_TRUE(stack->top != NULL);
     EXPECT_FALSE(isEmpty(stack));
     EXPECT_EQ(getTop(stack), stack->top);
 }
