@@ -19,8 +19,10 @@ void destroyStack(Stack* stack) {
     while (current != NULL) {
         Node *tmp = current;
         current = current->next;
+        tmp->next = NULL;
 	    free(tmp);
     }
+    stack->top = NULL;
 }
 
 void push(Stack* stack, int data) {
@@ -32,6 +34,8 @@ void push(Stack* stack, int data) {
 void pop(Stack* stack) {
     Node* temp = stack->top;
     stack->top = stack->top->next;
+    temp->next = NULL;
+    free(temp);
 }
 
 Node* searchByValue(Stack* stack, int value) {
@@ -40,6 +44,7 @@ Node* searchByValue(Stack* stack, int value) {
         if (current->data == value) {
             return current;
         }
+        current = current->next;
     }
     return NULL;
 }
@@ -72,7 +77,5 @@ void traverseStack(Stack* stack) {
 }
 
 bool isEmpty(Stack* stack) {
-    free(stack->top);
     return stack->top == NULL;
 }
-
