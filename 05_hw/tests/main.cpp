@@ -40,6 +40,21 @@ TEST_F(StackTest, TestPop) {
   EXPECT_EQ(isEmpty(&stack), true);
 }
 
+TEST_F(StackTest, TestValueSearch) {
+  EXPECT_EQ(searchByValue(&stack, 10), nullptr);
+  push(&stack, -324);
+  push(&stack, 12);
+  Node* res = searchByValue(&stack, 12); 
+  ASSERT_TRUE(res != nullptr);
+  EXPECT_EQ(res->data, 12);
+  res = searchByValue(&stack, -324); 
+  ASSERT_TRUE(res != nullptr);
+  EXPECT_EQ(res->data, -324);
+  pop(&stack);
+  res = searchByValue(&stack, 12); 
+  ASSERT_TRUE(res == nullptr);
+}
+
 int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);

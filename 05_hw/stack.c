@@ -41,6 +41,8 @@ Node* searchByValue(Stack* stack, int value) {
         if (current->data == value) {
             return current;
         }
+
+        current = current->next;
     }
     return NULL;
 }
