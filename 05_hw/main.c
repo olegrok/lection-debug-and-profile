@@ -10,6 +10,12 @@ int main() {
     push(&stack, 20);
     push(&stack, 30);
 
+    // if (isEmpty(&stack)) {
+    //     printf("Stack is empty\n");
+    // } else {
+    //     printf("Stack is not empty\n");
+    // }
+
     printf("After pushing elements:\n");
     traverseStack(&stack);
 
