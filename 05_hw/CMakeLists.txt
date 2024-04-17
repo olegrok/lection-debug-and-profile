@@ -2,16 +2,19 @@ cmake_minimum_required(VERSION 3.10)
 project(stack)
 
 option(ENABLE_ASAN OFF)
+option(BUILD_BENCHMARKS ON)
 
 include(FetchContent)
-FetchContent_Declare(
-  googletest
-  # Specify the commit you depend on and update it regularly.
-  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+
+FetchContent_Declare(googletest
+        GIT_REPOSITORY https://github.com/google/googletest
+        GIT_TAG main)
+
+FetchContent_Declare(googlebenchmark
+        GIT_REPOSITORY https://github.com/google/benchmark
+        GIT_TAG main)
+
+FetchContent_MakeAvailable(googletest googlebenchmark)
 
 if(ENABLE_ASAN)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address")
@@ -34,3 +37,10 @@ if(ENABLE_GCOV)
     target_link_options(tests PRIVATE "--coverage")
 endif()
 target_link_libraries(tests stack gtest_main)
+
+if(BUILD_BENCHMARKS)
+  add_executable(benchmarks benchmarks/main.cpp)
+  target_link_libraries(benchmarks stack benchmark::benchmark)
+  target_compile_options(benchmarks PRIVATE "-pg")
+  target_link_options(benchmarks PRIVATE "-pg")
+endif()
