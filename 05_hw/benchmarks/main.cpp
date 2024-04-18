@@ -26,7 +26,7 @@ BENCHMARK_DEFINE_F(StackBenchmark, PushBenchmark)(benchmark::State& state)
         }
     }
 }
-BENCHMARK_REGISTER_F(StackBenchmark, PushBenchmark)->ArgPair(0, 1000)->ArgPair(0, 100000)->ArgPair(0, 10000000)->Unit(benchmark::kMillisecond);
+BENCHMARK_REGISTER_F(StackBenchmark, PushBenchmark)->Args({0, 1000})->Args({0, 100000})->Args({0, 10000000})->Unit(benchmark::kMillisecond);
 
 
 BENCHMARK_DEFINE_F(StackBenchmark, PopBenchmark)(benchmark::State& state)
@@ -44,6 +44,6 @@ BENCHMARK_DEFINE_F(StackBenchmark, PopBenchmark)(benchmark::State& state)
         }
     }
 }
-BENCHMARK_REGISTER_F(StackBenchmark, PopBenchmark)->ArgPair(1000, 0)->ArgPair(100000, 0)->ArgPair(10000000, 0)->Unit(benchmark::kMillisecond);
+BENCHMARK_REGISTER_F(StackBenchmark, PopBenchmark)->Args({1000, 0})->Args({100000, 0})->Args({10000000, 0})->Unit(benchmark::kMillisecond);
 
 BENCHMARK_MAIN();
