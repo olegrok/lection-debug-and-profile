@@ -29,3 +29,6 @@ target_link_libraries(main stack)
 
 add_executable(gtest_stack gtest_stack.cpp)
 target_link_libraries(gtest_stack GTest::GTest stack)
+
+add_executable(fgtest_stack gtestf_stack.cpp)
+target_link_libraries(fgtest_stack GTest::GTest stack)
