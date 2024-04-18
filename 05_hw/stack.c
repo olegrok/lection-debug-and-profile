@@ -30,8 +30,13 @@ void push(Stack* stack, int data) {
 }
 
 void pop(Stack* stack) {
+    if (stack->top == NULL) {
+        exit(EXIT_FAILURE);
+    }
+    
     Node* temp = stack->top;
     stack->top = stack->top->next;
+    free(temp);
 }
 
 Node* searchByValue(Stack* stack, int value) {
@@ -40,6 +45,8 @@ Node* searchByValue(Stack* stack, int value) {
         if (current->data == value) {
             return current;
         }
+
+        current = current->next;
     }
     return NULL;
 }
@@ -72,7 +79,6 @@ void traverseStack(Stack* stack) {
 }
 
 bool isEmpty(Stack* stack) {
-    free(stack->top);
     return stack->top == NULL;
 }
 
