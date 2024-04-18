@@ -31,6 +31,7 @@ void push(Stack* stack, int data) {
 }
 
 void pop(Stack* stack) {
+    if (isEmpty(stack)) return;
     Node* temp = stack->top;
     stack->top = stack->top->next;
     free(temp);

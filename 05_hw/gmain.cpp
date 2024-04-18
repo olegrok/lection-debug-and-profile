@@ -61,6 +61,13 @@ TEST_F(StackTest, popNisEmptyTest) {
     EXPECT_TRUE(isEmpty(stack));
 }
 
+TEST_F(StackTest, popFromEmptyTest) {
+    push(stack, 10);
+    pop(stack);
+    EXPECT_TRUE(isEmpty(stack));
+    EXPECT_NO_THROW(pop(stack));
+}
+
 TEST_F(StackTest, searchByValueTest) {
     push(stack, 10);
     push(stack, 20);
