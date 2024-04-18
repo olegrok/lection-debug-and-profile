@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "stack.h"
 
 Node* createNode(int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
+    Node* newNode = malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = NULL;
     return newNode;
@@ -29,9 +30,13 @@ void push(Stack* stack, int data) {
     stack->top = newNode;
 }
 
-void pop(Stack* stack) {
+Node* pop(Stack* stack) {
     Node* temp = stack->top;
-    stack->top = stack->top->next;
+    stack->top = temp->next;
+    
+    stack->top->next = NULL;
+
+    return temp;
 }
 
 Node* searchByValue(Stack* stack, int value) {
@@ -61,14 +66,36 @@ Node* getTop(Stack* stack) {
     return stack->top;
 }
 
-void traverseStack(Stack* stack) {
+char* traverseStack(Stack* stack) {
     Node* current = stack->top;
     printf("Stack elements: ");
+    size_t len = 0;
+
     while (current != NULL) {
-        printf("%d ", current->data);
+        len++;
         current = current->next;
     }
-    printf("\n");
+
+    if (!len) return "";
+
+    char *output = malloc((sizeof(int) + 1) * len); 
+
+    current = stack->top;
+  
+    while (len > 0) {
+        char *buffer = malloc(sizeof(int) + 1);
+
+        (len == 1) ? sprintf(buffer,"%d", current->data) : sprintf(buffer,"%d ", current->data);
+        
+        strcat(output, buffer);
+
+        free(buffer);
+        len--;
+
+        current = current->next;
+    }
+
+    return output;
 }
 
 bool isEmpty(Stack* stack) {

@@ -14,12 +14,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_library(stack stack.c)
+add_library(fixtures fixtures.h)
+
+target_link_libraries(fixtures GTest::gtest_main)
 
 add_executable(main main.c)
 target_link_libraries(main stack)
-
-add_executable(test_create_node test_create_node.cpp)
-target_link_libraries(test_create_node GTest::gtest_main)
 
 add_executable(test_push test_push.cpp)
 target_link_libraries(test_push stack GTest::gtest_main)
@@ -28,10 +28,11 @@ add_executable(test_traverse_stack test_traverse_stack.cpp)
 target_link_libraries(test_traverse_stack stack GTest::gtest_main)
 
 add_executable(test_stack_is_empty test_stack_is_empty.cpp)
-target_link_libraries(test_stack_is_empty stack stack GTest::gtest_main)
+target_link_libraries(test_stack_is_empty stack GTest::gtest_main)
 
 
 include(GoogleTest)
 
-gtest_discover_tests(test_push test_stack_is_empty)
+gtest_discover_tests(test_push)
 gtest_discover_tests(test_stack_is_empty)
+gtest_discover_tests(test_traverse_stack)
