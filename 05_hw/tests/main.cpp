@@ -40,7 +40,7 @@ TEST_F(StackTest, TestPop) {
   EXPECT_EQ(getTop(&stack), nullptr);
   EXPECT_EQ(isEmpty(&stack), true);
 
-  ASSERT_EXIT(pop(&stack), ::testing::KilledBySignal(SIGSEGV),".*");
+  ASSERT_EXIT(pop(&stack), ::testing::ExitedWithCode(1), "");
 }
 
 TEST_F(StackTest, TestValueSearch) {

@@ -30,6 +30,10 @@ void push(Stack* stack, int data) {
 }
 
 void pop(Stack* stack) {
+    if (stack->top == NULL) {
+        exit(EXIT_FAILURE);
+    }
+    
     Node* temp = stack->top;
     stack->top = stack->top->next;
     free(temp);
