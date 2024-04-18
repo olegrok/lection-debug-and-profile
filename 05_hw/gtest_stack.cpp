@@ -7,6 +7,7 @@ TEST(StackTest, StackInit) {
 
     initStack(&stack);
     EXPECT_TRUE(getTop(&stack) == NULL);
+    destroyStack(&stack);
 }
 
 TEST(StackTest, PushPop) {
@@ -30,6 +31,8 @@ TEST(StackTest, PushPop) {
 
     pop(&stack);
     EXPECT_TRUE(getTop(&stack) == NULL);
+
+    destroyStack(&stack);
 }
 
 TEST(StackTest, IsEmpty) {
@@ -46,6 +49,8 @@ TEST(StackTest, IsEmpty) {
 
     pop(&stack);
     EXPECT_TRUE(isEmpty(&stack));
+
+    destroyStack(&stack);
 }
 
 TEST(StackTest, Destroy) {
@@ -57,7 +62,8 @@ TEST(StackTest, Destroy) {
     push(&stack, 30);
 
     destroyStack(&stack);
-    EXPECT_TRUE(isEmpty(&stack));
+
+    EXPECT_TRUE((&stack)->top == NULL);
 }
 
 TEST(StackTest, SearchByIndex) {
@@ -110,6 +116,16 @@ TEST(StackTest, GetTop) {
 
     destroyStack(&stack);
 }
+
+TEST(StackTest, PopFromEmpty) {
+    Stack stack;
+    initStack(&stack);
+
+    EXPECT_NO_THROW(pop(&stack));
+
+    destroyStack(&stack);
+}
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
