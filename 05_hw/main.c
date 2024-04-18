@@ -29,6 +29,7 @@ int main() {
     if (topElement != NULL) {
         printf("Top element: %d\n", topElement->data);
     }
+    destroyStack(&stack);
 
     return 0;
 }
